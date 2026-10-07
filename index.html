@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Florian Klausner</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        background: #f5f4f0;
+        color: #111;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 400;
+        line-height: 1.3;
+    }
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    /* NAVIGATION */
+
+    nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 22px 28px;
+        display: flex;
+        justify-content: space-between;
+        z-index: 100;
+        mix-blend-mode: difference;
+        color: white;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+    }
+
+    nav .links {
+        display: flex;
+        gap: 28px;
+    }
+
+    nav a {
+        transition: opacity 0.3s ease;
+    }
+
+    nav a:hover {
+        opacity: 0.5;
+    }
+
+    /* HERO */
+
+    .hero {
+        height: 100vh;
+        min-height: 700px;
+        padding: 28px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        position: relative;
+    }
+
+    .hero-image {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        overflow: hidden;
+    }
+
+    .hero-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: grayscale(100%);
+        transition: transform 1.2s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .hero:hover .hero-image img {
+        transform: scale(1.03);
+    }
+
+    .hero-title {
+        color: white;
+        mix-blend-mode: difference;
+        font-size: clamp(70px, 13vw, 190px);
+        line-height: 0.82;
+        letter-spacing: -0.07em;
+        max-width: 1000px;
+    }
+
+    .hero-meta {
+        color: white;
+        mix-blend-mode: difference;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+        font-size: 12px;
+        text-transform: uppercase;
+    }
+
+    /* INTRO */
+
+    .intro {
+        padding: 160px 7vw;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 60px;
+    }
+
+    .label {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+    }
+
+    .intro-text {
+        font-size: clamp(22px, 2.5vw, 40px);
+        line-height: 1.05;
+        letter-spacing: -0.04em;
+        max-width: 1000px;
+    }
+
+    /* PROJECTS */
+
+    .projects {
+        padding: 40px 28px 160px;
+    }
+
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        border-top: 1px solid #111;
+        padding-top: 12px;
+        margin-bottom: 100px;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+    }
+
+    .project {
+        margin-bottom: 180px;
+    }
+
+    .project-image {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 60px;
+    }
+
+    .project-image .project-description {
+        width: 200px;
+        font-size: 12px;
+        line-height: 1.4;
+    }
+
+    .project-image video {
+        width: 350px;
+        aspect-ratio: 9 / 16;
+        object-fit: cover;
+    }
+
+    .project:hover .project-image video {
+        transform: scale(1.025);
+    }
+
+    .project-info {
+        display: flex;
+        gap: 40px;
+        align-items: center;
+    }
+
+    .project-title {
+        font-size: 25px;
+        letter-spacing: -0.03em;
+    }
+
+    .project-description {
+        max-width: 500px;
+    }
+
+    .project-year {
+        text-align: right;
+    }
+
+    /* ALTERNATING PROJECT */
+
+    .project.small {
+        width: 65%;
+        margin-left: auto;
+    }
+
+    .project.small .project-info {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .project.small .project-description {
+        display: block;
+    }
+
+    /* ABOUT */
+
+    .about {
+        background: #111;
+        color: #f5f4f0;
+        padding: 150px 7vw;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 60px;
+    }
+
+    .about-text {
+        font-size: clamp(22px, 2.5vw, 44px);
+        line-height: 1;
+        letter-spacing: -0.05em;
+    }
+
+    .about-details {
+        margin-top: 100px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+        font-size: 12px;
+    }
+
+    .about-details h3 {
+        font-size: 11px;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+        font-weight: normal;
+        opacity: 0.5;
+    }
+
+    .about-details p {
+        margin-bottom: 6px;
+    }
+
+    /* CONTACT */
+
+    .contact {
+        padding: 180px 28px 50px;
+    }
+
+    .contact-main {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 60px;
+        align-items: end;
+    }
+
+    .contact-title {
+        font-size: clamp(70px, 14vw, 200px);
+        line-height: 0.8;
+        letter-spacing: -0.07em;
+    }
+
+    .contact-text {
+        font-size: clamp(25px, 3vw, 50px);
+        line-height: 1;
+        letter-spacing: -0.04em;
+        max-width: 1000px;
+    }
+
+    .contact-bottom {
+        display: flex;
+        justify-content: space-between;
+        border-top: 1px solid #111;
+        padding-top: 15px;
+        margin-top: 100px;
+        font-size: 12px;
+        text-transform: uppercase;
+    }
+
+    /* FADE IN */
+
+    .fade {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .fade.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 700px) {
+
+        nav {
+            padding: 18px;
+        }
+
+        nav .links {
+            gap: 15px;
+        }
+
+        .hero {
+            padding: 18px;
+        }
+
+        .hero-title {
+            font-size: 21vw;
+        }
+
+        .intro {
+            padding: 100px 18px;
+            grid-template-columns: 1fr;
+            gap: 35px;
+        }
+
+        .projects {
+            padding: 20px 18px 100px;
+        }
+
+        .project {
+            margin-bottom: 100px;
+        }
+
+        .project.small {
+            width: 100%;
+        }
+
+        .project-info,
+        .project.small .project-info {
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .project-year {
+            text-align: left;
+        }
+
+        .about {
+            padding: 100px 18px;
+            grid-template-columns: 1fr;
+        }
+
+        .about-details {
+            margin-top: 50px;
+        }
+
+        .contact {
+            padding: 100px 18px 30px;
+        }
+
+        .contact-title {
+            font-size: 23vw;
+        }
+
+        .contact-bottom {
+            flex-direction: column;
+            gap: 15px;
+        }
+    }
+</style>
+</head>
+
+
+<body>
+
+<!-- NAVIGATION -->
+
+<nav>
+    <a href="#top">FK</a>
+
+    <div class="links">
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </div>
+</nav>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-image">
+        <img
+            src="images/Subject.png"
+            alt="">
+    </div>
+
+    <h1 class="hero-title">
+        Florian<br>
+        Klausner
+    </h1>
+
+    <div class="hero-meta">
+        <span>Videography / Editing</span>
+        <span>Vienna - Austria</span>
+    </div>
+
+</section>
+
+
+<!-- INTRO -->
+
+<section class="intro fade">
+
+    <div class="label">
+        01 — About
+    </div>
+
+    <div class="intro-text">
+        I'm Florian, a 23-year-old architecture student based in Austria.
+        I'm interested in the intersection of visual storytelling, design and movement - 
+        from videography, photography and editing to architecture and endurance sports.
+        I enjoy creating, experimenting and turning ideas into visual stories, whether 
+        that means designing a space, capturing a moment or pushing myself through a long run or ride.
+    </div>
+
+</section>
+
+
+<!-- PROJECTS -->
+
+<section class="projects" id="projects">
+
+    <div class="section-header">
+        <span>Selected Projects</span>
+        <span>2024 — 2026</span>
+    </div>
+
+
+    <!-- PROJECT 01 -->
+
+    <article class="project fade">
+
+        <div class="project-image">
+            <video
+                src="images/letsrun_1.mov"
+                autoplay
+                muted
+                loop
+                playsinline>
+            </video>
+
+            <div class="project-info">
+
+                <div class="project-title">
+                    on a run
+                </div>
+            </div>
+
+            <div class="project-year">
+                2026<br>
+                Vienna
+            </div>
+
+            <div class="project-description">
+                Filming myself doing one of my hobbies and giving it a little spice afertwards
+            </div>
+
+        </div>
+
+    </article>
+
+
+    <!-- PROJECT 02 -->
+
+    <article class="project small fade">
+
+        <div class="project-image">
+
+            <div class="project-description">
+                Filming myself doing one of my hobbies and giving it a little spice afertwards
+            </div>
+
+            <div class="project-year">
+                2026<br>
+                Vienna
+            </div>
+
+            <div class="project-info">
+
+                <div class="project-title">
+                    on a run
+                </div>
+
+            </div>
+
+            <video
+                src="images/onARun2.mov"
+                autoplay
+                muted
+                loop
+                playsinline>
+            </video>
+
+        </div>
+
+    </article>
+
+
+    <!-- PROJECT 03 -->
+
+    <article class="project fade">
+
+        <div class="project-image">
+            <video
+                src="images/savethedate.mov"
+                autoplay
+                muted
+                loop
+                playsinline>
+            </video>
+
+            <div class="project-info">
+
+                <div class="project-title">
+                    Save the date
+                </div>
+
+            </div>
+
+            <div class="project-description">
+                The wedding of one of my best friends comes up and they needed "save the date" pictures. Did that and made a little 
+                video for them aswell to post on their socials.
+            </div>
+
+            <div class="project-year">
+                2026<br>
+                Vienna
+            </div>
+
+        </div>
+
+    </article>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section class="about" id="about">
+
+    <div class="label">
+        02 — About
+    </div>
+
+    <div>
+
+        <div class="about-text">
+            Creating has been a passion since childhood. Through my education in media technology, 
+            I developed a broad set of skills in photography, videography, editing and digital design, 
+            giving me the tools to turn ideas into visual concepts.
+            Today, my interests lie at the intersection of architecture, visual storytelling and endurance sports. 
+            I enjoy experimenting with different mediums, learning new tools and constantly finding new ways to create, 
+            capture and communicate ideas.
+        </div>
+
+        <div class="about-details">
+
+            <div>
+                <h3>Education</h3>
+
+                <p>Medientechnik - HTL Leonding</p>
+                <p>Architecture - TU Wien</p>
+            </div>
+
+            <div>
+                <h3>Interests</h3>
+
+                <p>Videography</p>
+                <p>Photography</p>
+                <p>Editing</p>
+                <p>Architecture</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section class="contact" id="contact">
+
+    <div class="contact-main">
+
+        <div class="contact-title">
+            Let's<br>
+            talk.
+        </div>
+
+        <div class="contact-text">
+            If there are any quesntions about me and my work, feel free to shoot me a text and ask.
+            You can find my email in the bottom left corner of this beautiful website. 
+
+            You can also get in touch with me via Instagram. Just click on the Instagram handle in the bottom right corner.
+        </div>
+
+    </div>
+
+    <div class="contact-bottom">
+
+        <a href="mailto:klausnerflo@gmail.com">
+            klausnerflo@gmail.com
+        </a>
+
+        <span>
+            © 2026 Florian Klausner
+        </span>
+
+        <a href="https://www.instagram.com/floklausner/?hl=de">
+            Instagram ↗
+        </a>
+
+    </div>
+
+</section>
+
+
+<script>
+
+    const elements = document.querySelectorAll('.fade');
+
+    const observer = new IntersectionObserver(
+        (entries) => {
+
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+
+            });
+
+        },
+        {
+            threshold: 0.15
+        }
+    );
+
+    elements.forEach(element => {
+        observer.observe(element);
+    });
+
+</script>
+
+</body>
+</html>
