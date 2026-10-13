@@ -164,6 +164,18 @@
     min-width: 0;
 }
 
+.project-card.video-4-3 {
+    width: 100%;
+    grid-column: span 2;
+}
+
+.project-card.video-4-3 video {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
+
 .project-open {
     position: relative;
     display: block;
@@ -798,7 +810,8 @@ document.addEventListener("DOMContentLoaded", () => {
             </button>
         </article>
 
-        <article class="project-card"
+        <!-- PROJECT 05-->
+        <article class="project-card video-4-3"
             data-video="images/onarun3_v2"
             data-title="Save the date"
             data-year="2026"
