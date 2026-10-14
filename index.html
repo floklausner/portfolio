@@ -177,6 +177,20 @@
     object-fit: cover;
 }
 
+.project-card.video-4-3-right {
+    grid-column: 2 / span 2;
+    width: 100%;
+    transform: translateY(-130px);
+}
+
+.project-card.video-4-3-right video {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
+
+
 .project-open {
     position: relative;
     display: block;
@@ -380,6 +394,10 @@
     .modal-close {
         top: 20px;
         right: 18px;
+    }
+
+    .project-card.project-card.video-4-3-right {
+        grid-column: 1 / span 2;
     }
 }
 
@@ -828,6 +846,29 @@ document.addEventListener("DOMContentLoaded", () => {
                     autoplay muted loop playsinline preload="metadata"></video>
                 <span class="project-overlay">
                     <span class="project-card-title">on a run</span>
+                    <span class="project-card-year">2026 / Vienna</span>
+                    <span class="project-view">View project ↗</span>
+                </span>
+            </button>
+        </article>
+
+        <!-- PROJECT 6-->
+        <article class="project-card video-4-3-right"
+            data-video="videos/wigutt_ep8.mp4"
+            data-title="what i got up to"
+            data-year="2026"
+            data-location="Vienna"
+            data-description="
+            A little glimpse into my day - capturing the moments, 
+            places and things I got up to along the way. 
+            Nothing too special, just everyday life through my lens.">
+
+            <button class="project-open" type="button"
+                aria-label="Open project: on a run">
+                <video src="videos/wigutt_ep8.mp4"
+                    autoplay muted loop playsinline preload="metadata"></video>
+                <span class="project-overlay">
+                    <span class="project-card-title">what i got up to</span>
                     <span class="project-card-year">2026 / Vienna</span>
                     <span class="project-view">View project ↗</span>
                 </span>
